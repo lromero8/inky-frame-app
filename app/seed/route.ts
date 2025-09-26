@@ -28,3 +28,14 @@ async function seedUsers() {
 
   return insertedUsers;
 }
+
+export async function GET() {
+  try {
+    await sql.begin(async () => {
+      await seedUsers();
+    });
+    return Response.json({ message: 'Database seeded successfully' });
+  } catch (error) {
+    return Response.json({ error }, { status: 500 });
+  }
+}
