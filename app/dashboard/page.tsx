@@ -1,3 +1,12 @@
+import WeatherCard from "../ui/weather/weather-card";
+
 export default function Page() {
-  return <p>Dashboard Page</p>;
+  return (
+      <div>
+          <p>Dashboard Page</p>
+
+            <WeatherCard />
+
+      </div>
+  );
 }
