@@ -8,6 +8,7 @@ export async function GET() {
   return NextResponse.json({
     temp: current.temp,
     description: current.weather[0]?.description ?? '',
+    icon: current.weather[0]?.icon ?? '',
     updatedAt: Date.now()
   });
 }
