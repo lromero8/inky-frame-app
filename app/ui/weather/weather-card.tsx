@@ -48,6 +48,7 @@ export default function WeatherCard() {
   <p style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 600 }}>{Math.round(data.temp)}°C</p>
         <small style={{ opacity: 0.6 }}>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
       </div>
+      <strong>{iconUrl}</strong>
     </div>
   );
 }
