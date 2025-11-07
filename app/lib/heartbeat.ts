@@ -23,9 +23,12 @@ export async function touchHeartbeat(force = false, daysInterval = 3) {
   await ensureHeartbeatTable();
   const rows = await sql<{ updated_at: string; wrote: boolean }[]>`
     WITH upd AS (
-      UPDATE app_heartbeat SET updated_at = now()
+      UPDATE app_heartbeat SET updated_at = CASE
+        WHEN app_heartbeat.updated_at < now() - interval '3 days' OR ${force}::boolean
+          THEN excluded.updated_at
+        ELSE app_heartbeat.updated_at
+      END
       WHERE tag = 'app'
-        AND (updated_at < now() - interval '${daysInterval} days' OR ${force})
       RETURNING updated_at
     )
     SELECT 
