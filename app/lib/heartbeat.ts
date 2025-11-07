@@ -21,18 +21,20 @@ export async function ensureHeartbeatTable() {
 export async function touchHeartbeat(force = false, daysInterval = 3) {
   // Guarantee table exists (cheap idempotent calls)
   await ensureHeartbeatTable();
+
   const rows = await sql<{ updated_at: string; wrote: boolean }[]>`
     WITH upd AS (
-      UPDATE app_heartbeat SET updated_at = CASE
-        WHEN app_heartbeat.updated_at < now() - interval '3 days' OR ${force}::boolean
-          THEN excluded.updated_at
-        ELSE app_heartbeat.updated_at
-      END
+      UPDATE app_heartbeat
+      SET updated_at = now()
       WHERE tag = 'app'
+        AND ( ${force}::boolean OR updated_at < now() - ${daysInterval} * interval '1 day')
       RETURNING updated_at
     )
     SELECT 
-      COALESCE((SELECT updated_at FROM upd), (SELECT updated_at FROM app_heartbeat WHERE tag='app')) AS updated_at,
+      COALESCE(
+        (SELECT updated_at FROM upd),
+        (SELECT updated_at FROM app_heartbeat WHERE tag='app')
+      ) AS updated_at,
       EXISTS(SELECT 1 FROM upd) AS wrote;
   `;
   return rows[0];
