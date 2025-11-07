@@ -1,11 +1,14 @@
 'use client';
 import useSWR from 'swr';
-import { getWeatherIconUrl } from '@/app/lib/weather/openweather.icon'; // icon helper
+import { getWeatherIconUrl } from '@/app/lib/weather/openweather.icon';
+import Image from 'next/image';
+
 
 interface CurrentWeatherPayload {
   temp: number;
   description: string;
-  icon: string; // added
+  id: string;
+  dateTime: 'day' | 'night'; 
   updatedAt: number;
 }
 
@@ -23,32 +26,43 @@ export default function WeatherCard() {
   if (isLoading || !data) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
-  const iconUrl = getWeatherIconUrl(data.icon);
+  const iconUrl = getWeatherIconUrl(data.id, data.dateTime);
+  const icon = `wi-${iconUrl}.svg`;
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-      {iconUrl && (
-        <img
-          src={iconUrl}
-          alt={data.description}
-          width={64}
-          height={64}
-          style={{
-            width: 64,
-            height: 64,
-            objectFit: 'contain',
-            borderRadius: 12,
-            background: 'linear-gradient(135deg,#ffffff,#f5f5f5)',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
-          }}
-        />
-      )}
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <p style={{ margin: 0, fontSize: '0.9rem', textTransform: 'capitalize' }}>{data.description}</p>
-  <p style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 600 }}>{Math.round(data.temp)}°C</p>
-        <small style={{ opacity: 0.6 }}>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
-      </div>
-      <strong>{iconUrl}</strong>
-    </div>
+  //   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+  //     {iconUrl && (
+  //       <img
+  //         src={iconUrl}
+  //         alt={data.description}
+  //         width={64}
+  //         height={64}
+  //         style={{
+  //           width: 64,
+  //           height: 64,
+  //           objectFit: 'contain',
+  //           borderRadius: 12,
+  //           background: 'linear-gradient(135deg,#ffffff,#f5f5f5)',
+  //           boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+  //         }}
+  //       />
+  //     )}
+  //     <div style={{ display: 'flex', flexDirection: 'column' }}>
+  //       <p style={{ margin: 0, fontSize: '0.9rem', textTransform: 'capitalize' }}>{data.description}</p>
+  // <p style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 600 }}>{Math.round(data.temp)}°C</p>
+  //       <small style={{ opacity: 0.6 }}>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
+  //     </div>
+  //     <strong>{iconUrl}</strong>
+  //   </div>
+  <div>
+    {data.id}
+    {icon}
+    <Image
+      src={icon}
+      width={1000}
+      height={760}
+      alt="Screenshots of the dashboard project showing desktop version"
+    />
+  </div>
   );
 }
