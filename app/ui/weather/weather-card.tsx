@@ -54,7 +54,7 @@ export default function WeatherCard() {
   //     </div>
   //     <strong>{iconUrl}</strong>
   //   </div>
-  <div className="inky-frame-weather-widget">
+  <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
     {data.id}
     {icon}
     <Image
