@@ -8,7 +8,8 @@ export async function GET() {
   return NextResponse.json({
     temp: current.temp,
     description: current.weather[0]?.description ?? '',
-    icon: current.weather[0]?.icon ?? '',
+    id: current.weather[0]?.id ?? '',
+    dateTime: current.weather[0]?.icon.includes('d') ? 'day' : 'night',
     updatedAt: Date.now()
   });
 }
