@@ -31,3 +31,38 @@ export async function fetchOneCall(params: OneCallParams): Promise<OpenWeatherOn
   if (!res.ok) throw new Error(`OpenWeather error ${res.status}`);
   return res.json();
 }
+
+interface LocationResponse {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: number;
+  lon: number;
+  class: string;
+  type: string;
+  place_rank: number;
+  importance: number;
+  addresstype: string;
+  name: string;
+  display_name: string;
+  address: {
+    house_number: number;
+    road: string;
+    suburb: string;
+    city_district: string;
+    city: string;
+    state: string;
+    postcode: string;
+    country: string;
+    country_code: string;
+  },
+  boundingbox: string[];
+}
+
+export async function fetchLocationName(lat: number, lon: number): Promise<LocationResponse> {
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Location fetch error ${res.status}`);
+  return res.json();
+}
