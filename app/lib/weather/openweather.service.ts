@@ -1,8 +1,12 @@
-import { fetchOneCall, OneCallParams } from './openweather.server';
+import { fetchLocationName, fetchOneCall, OneCallParams } from './openweather.server';
+
+export async function getCurrentAndDailyWeather(params: OneCallParams) {
+  const data = await fetchOneCall({ ...params, exclude: ['minutely', 'alerts'] });
+  return data;
+}
 
 export async function getCurrentWeather(params: OneCallParams) {
-  const data = await fetchOneCall({ ...params, exclude: ['minutely', 'alerts'] });
-  console.log('Fetched current weather:', data);
+  const data = await fetchOneCall({ ...params, exclude: ['minutely', 'alerts', 'daily'] });
   return data.current;
 }
 
@@ -11,4 +15,13 @@ export async function getDailyForecast(params: OneCallParams) {
   return data.daily;
 }
 
-// https://nominatim.openstreetmap.org/reverse?lat=50.91&lon=6.96&format=json
+export async function getLocationName(params: OneCallParams) {
+  const { lat, lon } = params;
+  const data = await fetchLocationName(lat, lon);
+  const address = data.address;
+  return {
+    city: address.city,
+    city_district: address.city_district,
+    country: address.country
+  };
+}
