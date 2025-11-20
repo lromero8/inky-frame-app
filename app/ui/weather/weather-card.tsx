@@ -3,12 +3,18 @@ import useSWR from 'swr';
 import { getWeatherIconUrl } from '@/app/lib/weather/openweather.icon';
 import Image from 'next/image';
 
+interface Location {
+  city: string;
+  city_district: string;
+  country: string;
+}
 
 interface CurrentWeatherPayload {
   temp: number;
   description: string;
   id: string;
-  dateTime: 'day' | 'night'; 
+  dateTime: 'day' | 'night';
+  location: Location;
   updatedAt: number;
 }
 
@@ -28,6 +34,7 @@ export default function WeatherCard() {
 
   const iconUrl = getWeatherIconUrl(data.id, data.dateTime);
   const icon = `wi-${iconUrl}.svg`;
+  // console.log(data.location)
 
   return (
   //   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -57,6 +64,8 @@ export default function WeatherCard() {
   <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
     {data.id}
     {icon}
+    <div>{ data.location.city_district}, { data.location.city}</div>
+    <div>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: '2-digit' })}</div>
     <Image
       src={icon}
       width={1000}
