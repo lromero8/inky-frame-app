@@ -62,7 +62,14 @@ interface LocationResponse {
 
 export async function fetchLocationName(lat: number, lon: number): Promise<LocationResponse> {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
-  const res = await fetch(url);
+  const headers: Record<string, string> = {
+    // Nominatim requires a valid User-Agent or Referer identifying the application.
+    // Provide an app-identifying User-Agent and a Referer to reduce chance of 403.
+    'User-Agent': 'inky-frame-app/1.0 (+https://inky-frame-app.vercel.app)',
+    'Referer': 'https://inky-frame-app.vercel.app',
+    'Accept': 'application/json'
+  };
+  const res = await fetch(url, { headers });
   if (!res.ok) throw new Error(`Location fetch error ${res.status}`);
   return res.json();
 }
