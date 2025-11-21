@@ -3,6 +3,21 @@
  * Optional fields (returned only in certain conditions) are marked with ?.
  */
 
+interface Location {
+  city: string;
+  city_district: string;
+  country: string;
+}
+
+export interface CurrentWeatherPayload {
+  temp: number;
+  description: string;
+  id: string;
+  dateTime: 'day' | 'night';
+  location: Location;
+  updatedAt: number;
+}
+
 export interface OpenWeatherOneCallResponse {
   lat: number;
   lon: number;
