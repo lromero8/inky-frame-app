@@ -1,22 +1,16 @@
 'use client';
 import useSWR from 'swr';
-import { getWeatherIconUrl } from '@/app/lib/weather/openweather.icon';
-import Image from 'next/image';
+import WeatherIcon from './weather-icon';
+import { CurrentWeatherPayload } from '@/app/lib/definitions';
+import WeatherLocation from './weather-location';
+import WeatherTemperature from './weather-temperature';
 
-interface Location {
-  city: string;
-  city_district: string;
-  country: string;
-}
-
-interface CurrentWeatherPayload {
-  temp: number;
-  description: string;
-  id: string;
-  dateTime: 'day' | 'night';
-  location: Location;
-  updatedAt: number;
-}
+/**
+ * I think I need to refactor this weather card and split it into smaller components.
+ * One component for the icon, one for the location and date, one for the temperature and update time, and one for the carousel of daily forecasts.
+ * This will make it easier to manage the layout and styling of each part separately.
+ * So this component will just be a container for the other components. 
+ */
 
 const fetcher = async (): Promise<CurrentWeatherPayload> => {
   const res = await fetch('/api/weather');
@@ -32,51 +26,13 @@ export default function WeatherCard() {
   if (isLoading || !data) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
-  const iconUrl = getWeatherIconUrl(data.id, data.dateTime);
-  const icon = `wi-${iconUrl}.svg`;
-  // console.log(data.location)
-
   return (
-  //   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-  //     {iconUrl && (
-  //       <img
-  //         src={iconUrl}
-  //         alt={data.description}
-  //         width={64}
-  //         height={64}
-  //         style={{
-  //           width: 64,
-  //           height: 64,
-  //           objectFit: 'contain',
-  //           borderRadius: 12,
-  //           background: 'linear-gradient(135deg,#ffffff,#f5f5f5)',
-  //           boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
-  //         }}
-  //       />
-  //     )}
-  //     <div style={{ display: 'flex', flexDirection: 'column' }}>
-  //       <p style={{ margin: 0, fontSize: '0.9rem', textTransform: 'capitalize' }}>{data.description}</p>
-  // <p style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 600 }}>{Math.round(data.temp)}°C</p>
-  //       <small style={{ opacity: 0.6 }}>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
-  //     </div>
-  //     <strong>{iconUrl}</strong>
-  //   </div>
-  <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
-    {data.id}
-    {icon}
-    <div>{ data.location.city_district}, { data.location.city}</div>
-    <div>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: '2-digit' })}</div>
-    <Image
-      src={icon}
-      width={1000}
-      height={760}
-      alt="Screenshots of the dashboard project showing desktop version"
-    />
-    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-      <p style={{ margin: 0, fontSize: '0.9rem', textTransform: 'capitalize' }}>{data.description}</p>
-      <p style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 600 }}>{Math.round(data.temp)}°C</p>
-      <small style={{ opacity: 0.6 }}>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
+    <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
+      <WeatherLocation data={data} />
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <WeatherIcon data={data} />
+        <WeatherTemperature data={data} />
+      </div>
     </div>
-  </div>
   );
 }
