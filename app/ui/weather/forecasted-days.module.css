@@ -1,0 +1,58 @@
+.carousel {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  overflow-x: auto;
+  width: 100%;
+  padding: 0.5rem 0;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.5rem;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  min-width: 6rem;
+  background-color: #fff;
+  gap: 0.25rem;
+}
+
+.dayName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.iconContainer {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.25rem 0;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  filter: contrast(1.2);
+}
+
+.temperatures {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  gap: 0.125rem;
+}
+
+.maxTemp {
+  font-weight: 700;
+  color: #000;
+}
+
+.minTemp {
+  font-weight: 400;
+  color: #666;
+}

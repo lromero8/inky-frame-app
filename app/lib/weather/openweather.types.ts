@@ -15,6 +15,7 @@ export interface CurrentWeatherPayload {
   id: string;
   dateTime: 'day' | 'night';
   location: Location;
+  daily: DailyForecast[];
   updatedAt: number;
 }
 
@@ -74,7 +75,7 @@ interface HourlyForecast {
   weather: WeatherCondition[];
 }
 
-interface DailyForecast {
+export interface DailyForecast {
   dt: number;
   sunrise?: number;
   sunset?: number;

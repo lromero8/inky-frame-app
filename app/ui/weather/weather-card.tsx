@@ -4,6 +4,7 @@ import WeatherIcon from './weather-icon';
 import { CurrentWeatherPayload } from '@/app/lib/definitions';
 import WeatherLocation from './weather-location';
 import WeatherTemperature from './weather-temperature';
+import ForecastedDays from './forecasted-days';
 
 /**
  * I think I need to refactor this weather card and split it into smaller components.
@@ -33,6 +34,7 @@ export default function WeatherCard() {
         <WeatherIcon data={data} />
         <WeatherTemperature data={data} />
       </div>
+      <ForecastedDays days={data.daily} />
     </div>
   );
 }
