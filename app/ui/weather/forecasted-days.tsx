@@ -11,8 +11,7 @@ interface ForecastedDay {
 }
 
 export default function ForecastedDays({ days }: { days: DailyForecast[] }) {
-  const slicedDays = days.slice(1, days.length); // Get first all days except today
-  const forecastedDays = slicedDays.map<ForecastedDay>((day) => {
+  const forecastedDays = days.map<ForecastedDay>((day) => {
     const date = new Date(day.dt * 1000);
     const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
     const maxTemp = Math.round(day.temp.max);
