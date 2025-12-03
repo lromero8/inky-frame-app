@@ -1,12 +1,29 @@
+"use client";
+
+import { useState } from "react";
 import WeatherCard from "../ui/weather/weather-card";
+import WidgetSelector from "../ui/dashboard/widget-selector";
+
+type WidgetKey = "weather" | "calendar" | "ai-images";
 
 export default function Page() {
+  const [mainWidget, setMainWidget] = useState<WidgetKey>("weather");
+
   return (
-      <div>
-          <p>Dashboard Page</p>
+    <div className="main-widget p-4 space-y-4">
 
-            <WeatherCard />
-
+      <div className="mb-64">
+        {mainWidget === "weather" && <WeatherCard />}
+        {mainWidget === "calendar" && (
+          <div className="h-40 flex items-center justify-center">Calendar coming soon</div>
+        )}
+        {mainWidget === "ai-images" && (
+          <div className="h-40 flex items-center justify-center">AI Images coming soon</div>
+        )}
       </div>
+
+      <WidgetSelector defaultWidget="weather" onChange={setMainWidget} />
+
+    </div>
   );
 }
