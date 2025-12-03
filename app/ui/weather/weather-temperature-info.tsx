@@ -1,7 +1,7 @@
 import { CurrentWeatherPayload } from "@/app/lib/definitions";
 import Image from "next/image";
 
-export default function WeatherTemperature({ data }: { data: CurrentWeatherPayload }) {
+export default function WeatherTemperatureInfo({ data }: { data: CurrentWeatherPayload }) {
     const sunrise = data.daily[0]?.sunrise;
     const sunset = data.daily[0]?.sunset;
     const formattedSunrise = new Date(sunrise ? sunrise * 1000 : 0).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });

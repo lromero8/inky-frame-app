@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import WeatherIcon from './weather-icon';
 import { CurrentWeatherPayload } from '@/app/lib/definitions';
 import WeatherLocation from './weather-location';
-import WeatherTemperature from './weather-temperature';
+import WeatherTemperatureInfo from './weather-temperature-info';
 import ForecastedDays from './forecasted-days';
 
 const fetcher = async (): Promise<CurrentWeatherPayload> => {
@@ -25,7 +25,7 @@ export default function WeatherWidget() {
       <WeatherLocation data={data} />
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '5rem' }}>
         <WeatherIcon data={data} />
-        <WeatherTemperature data={data} />
+        <WeatherTemperatureInfo data={data} />
       </div>
       <ForecastedDays days={data.daily} />
     </div>
