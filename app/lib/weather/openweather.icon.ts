@@ -4,10 +4,7 @@ export function getWeatherIconUrl(id: string, dateTime: 'day' | 'night'): string
         return '';
     }
     const icon = weatherIconMap[id];
-    console.log('Mapped icon for id', id, 'is', icon);
-    console.log('Using dateTime:', icon[dateTime]);
     return icon[dateTime];
-    // return `https://openweathermap.org/img/wn/${icon[dateTime]}2x.png`;
 }
 
 // Map of weather condition codes to their corresponding day and night icons
