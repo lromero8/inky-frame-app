@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import WeatherCard from "../ui/weather/weather-card";
+import WeatherWidget from "../ui/weather/weather-widget";
 import WidgetSelector from "../ui/dashboard/widget-selector";
 
 type WidgetKey = "weather" | "calendar" | "ai-images";
@@ -13,7 +13,7 @@ export default function Page() {
     <div className="p-4 space-y-4">
 
       <div className="main-widget mb-64">
-        {mainWidget === "weather" && <WeatherCard />}
+        {mainWidget === "weather" && <WeatherWidget />}
         {mainWidget === "calendar" && (
           <div className="h-40 flex items-center justify-center">Calendar coming soon</div>
         )}
