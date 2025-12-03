@@ -10,9 +10,9 @@ export default function Page() {
   const [mainWidget, setMainWidget] = useState<WidgetKey>("weather");
 
   return (
-    <div className="main-widget p-4 space-y-4">
+    <div className="p-4 space-y-4">
 
-      <div className="mb-64">
+      <div className="main-widget mb-64">
         {mainWidget === "weather" && <WeatherCard />}
         {mainWidget === "calendar" && (
           <div className="h-40 flex items-center justify-center">Calendar coming soon</div>
