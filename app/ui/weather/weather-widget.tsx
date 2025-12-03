@@ -23,7 +23,7 @@ export default function WeatherWidget() {
   return (
     <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
       <WeatherLocation data={data} />
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '5rem' }}>
         <WeatherIcon data={data} />
         <WeatherTemperature data={data} />
       </div>
