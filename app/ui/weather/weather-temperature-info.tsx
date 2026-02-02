@@ -9,6 +9,10 @@ export default function WeatherTemperatureInfo({ data }: { data: CurrentWeatherP
     const sunriseIcon = 'wi-sunrise.svg';
     const sunsetIcon = 'wi-sunset.svg';
 
+    const iconStyle = {
+        filter: 'contrast(1.5) saturate(1.8) brightness(0.95)'
+    };
+
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3.5rem' }}>
@@ -43,6 +47,7 @@ export default function WeatherTemperatureInfo({ data }: { data: CurrentWeatherP
                             width={50}
                             height={40}
                             alt="Sunrise Icon"
+                            style={iconStyle}
                         />
                         <strong>{formattedSunrise}</strong>
                     </div>
@@ -52,13 +57,14 @@ export default function WeatherTemperatureInfo({ data }: { data: CurrentWeatherP
                             width={50}
                             height={40}
                             alt="Sunset Icon"
+                            style={iconStyle}
                         />
                         <strong>{formattedSunset}</strong>
                     </div>
                 </div>
             </div>
             <strong style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '4.5rem' }}>
-                <small style={{ opacity: 0.6 }}>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
+                <small>Updated {new Date(data.updatedAt).toLocaleTimeString()}</small>
             </strong>
         </div>
     );
