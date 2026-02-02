@@ -12,16 +12,18 @@ export default function Page() {
   return (
     <div className="p-4 space-y-4">
 
-      <div className="main-widget-container">
+      <div className="flex justify-center items-center min-h-[600px]">
         <div 
-          className="main-widget mb-64" 
+          className="main-widget" 
           style={{ 
             width: '800px', 
             height: '480px', 
             overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            border: '1px solid #e5e7eb',
+            borderRadius: '0.5rem'
           }}
         >
           {mainWidget === "weather" && <WeatherWidget />}
