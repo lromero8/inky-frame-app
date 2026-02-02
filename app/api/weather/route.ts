@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getCurrentAndDailyWeather, getLocationName } from '../../lib/weather/openweather.service';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 600;
 
 export async function GET() {
