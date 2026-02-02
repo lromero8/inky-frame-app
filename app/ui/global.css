@@ -16,3 +16,17 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* Center the widget container on larger screens */
+.main-widget-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* When viewport is exactly 800x480 (screenshot mode), remove centering */
+@media (max-width: 800px) and (max-height: 480px) {
+  .main-widget-container {
+    display: block;
+  }
+}
