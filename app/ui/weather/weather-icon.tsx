@@ -8,8 +8,8 @@ export default function WeatherIcon({ data }: { data: CurrentWeatherPayload }) {
     return (
         <Image
             src={icon}
-            width={1000}
-            height={760}
+            width={180}
+            height={137}
             alt="Screenshots of the dashboard project showing desktop version"
         />
     );

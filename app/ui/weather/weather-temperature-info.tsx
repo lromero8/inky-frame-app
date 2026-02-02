@@ -16,7 +16,7 @@ export default function WeatherTemperatureInfo({ data }: { data: CurrentWeatherP
                     <strong style={{ margin: '2px 0 0', fontSize: '2rem', fontWeight: 600 }}>{Math.round(data.temp)}°C</strong>
                     <strong style={{ margin: 0, fontSize: '1.2rem', textTransform: 'capitalize' }}>{data.description}</strong>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' , gap: '2rem' }}>
+                {/* <div style={{ display: 'flex', flexDirection: 'column' , gap: '2rem' }}>
                     <div>
                         <Image 
                             src={sunriseIcon}
@@ -31,6 +31,26 @@ export default function WeatherTemperatureInfo({ data }: { data: CurrentWeatherP
                             src={sunsetIcon}
                             width={70}
                             height={56}
+                            alt="Sunset Icon"
+                        />
+                        <strong>{formattedSunset}</strong>
+                    </div>
+                </div> */}
+                <div style={{ display: 'flex', flexDirection: 'column' , gap: '0.75rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Image 
+                            src={sunriseIcon}
+                            width={50}
+                            height={40}
+                            alt="Sunrise Icon"
+                        />
+                        <strong>{formattedSunrise}</strong>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Image
+                            src={sunsetIcon}
+                            width={50}
+                            height={40}
                             alt="Sunset Icon"
                         />
                         <strong>{formattedSunset}</strong>
