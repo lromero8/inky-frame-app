@@ -21,9 +21,30 @@ export default function WeatherWidget() {
   if (error) return <div>Error</div>;
 
   return (
-    <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
+    // <div className="inky-frame-weather-widget" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '0.75rem' }}>
+    <div 
+      className="inky-frame-weather-widget" 
+      style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        flexDirection: 'column', 
+        gap: '0.5rem',
+        width: '100%',
+        height: '100%',
+        padding: '1rem',
+        boxSizing: 'border-box'
+      }}
+    >
       <WeatherLocation data={data} />
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '5rem' }}>
+      {/* <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '5rem' }}> */}
+      <div style={{
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        gap: '3rem',
+        flex: '0 0 auto'
+      }}>
         <WeatherIcon data={data} />
         <WeatherTemperatureInfo data={data} />
       </div>
